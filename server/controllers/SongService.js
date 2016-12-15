@@ -39,6 +39,4 @@ exports.getSongById = function(args, res, next) {
   else {
     res.end();
   }
-  
 }
-

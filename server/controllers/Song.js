@@ -15,5 +15,6 @@ module.exports.deleteSong = function deleteSong (req, res, next) {
 };
 
 module.exports.getSongById = function getSongById (req, res, next) {
+  console.log('*****');
   Song.getSongById(req.swagger.params, res, next);
 };
