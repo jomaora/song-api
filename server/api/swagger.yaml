@@ -13,8 +13,8 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "virtserver.swaggerhub.com"
-basePath: "/jomaora/test/2.0.1"
+# host: "petstore.swagger.io"
+# basePath: "/v2"
 tags:
 - name: "song"
   description: "Access to songs operations in our music collection"
@@ -26,9 +26,55 @@ tags:
   externalDocs:
     description: "Find out more about our store"
     url: "http://swagger.io"
-schemes:
-- "https"
+# schemes:
+# - "http"
 paths:
+  /songs:
+    get:
+      tags:
+      - "song"
+      operationId: "getSongs"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        200:
+          description: "Song created"
+          schema:
+            type: array
+            items: 
+              $ref: "#/definitions/Song"
+      security:
+      - api_key: []
+    post:
+      tags:
+      - "song"
+      summary: "Add a new song to the collection"
+      description: ""
+      operationId: "addSong"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Song object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Song"
+      responses:
+        201:
+          description: "Song created"
+        400:
+          description: "Invalid input"
+      security:
+      - api_key: []
   /song/{songId}:
     get:
       tags:
@@ -64,7 +110,6 @@ paths:
           description: "Song not found"
       security:
       - api_key: []
-      x-swagger-router-controller: "Song"
     delete:
       tags:
       - "song"
@@ -92,35 +137,6 @@ paths:
           description: "Song not found"
       security:
       - api_key: []
-      x-swagger-router-controller: "Song"
-  /songs:
-    post:
-      tags:
-      - "song"
-      summary: "Add a new song to the collection"
-      description: ""
-      operationId: "addSong"
-      consumes:
-      - "application/json"
-      - "application/xml"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Song object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Song"
-      responses:
-        201:
-          description: "Song created"
-        405:
-          description: "Invalid input"
-      security:
-      - api_key: []
-      x-swagger-router-controller: "Song"
   /user:
     post:
       tags:
@@ -141,7 +157,6 @@ paths:
       responses:
         default:
           description: "successful operation"
-      x-swagger-router-controller: "User"
   /user/login:
     get:
       tags:
@@ -179,7 +194,6 @@ paths:
               description: "date in UTC when token expires"
         400:
           description: "Invalid username/password supplied"
-      x-swagger-router-controller: "User"
   /user/logout:
     get:
       tags:
@@ -194,7 +208,6 @@ paths:
       responses:
         default:
           description: "successful operation"
-      x-swagger-router-controller: "User"
   /user/{username}:
     get:
       tags:
@@ -220,7 +233,6 @@ paths:
           description: "Invalid username supplied"
         404:
           description: "User not found"
-      x-swagger-router-controller: "User"
 securityDefinitions:
   api_key:
     type: "apiKey"
@@ -273,3 +285,10 @@ externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
 x-azure-api-id: "sh-1469571953760"
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+# basePath: /jomaora/test/2.0.0
+schemes:
+ - https
+# Added by API Auto Mocking Plugin
+basePath: /jomaora/test/2.0.1
